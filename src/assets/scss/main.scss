@@ -1,0 +1,25 @@
+@import './mixin/font-size';
+@import './mixin/z-index';
+@import './mixin/media-query';
+
+@import './globals/variables';
+
+
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html, body {
+  
+  background-color: $main-bgcolor;
+
+	font-family: $font-family;
+  font-size: 16px;
+}
+
+
+
+
