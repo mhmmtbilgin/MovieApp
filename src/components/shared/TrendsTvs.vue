@@ -96,18 +96,11 @@
 export default {
  
   setup() {
-   let products;
-      products=function ApiFetch() {
-            fetch('http://www.omdbapi.com/?i=tt3896198&apikey=7ef8b08f')
-            .then(res=>res.json())
-            .then(data=>this.products=data)  
-            
-        }
+   
 
 
 
     return {
-     products,
 
     };
     
