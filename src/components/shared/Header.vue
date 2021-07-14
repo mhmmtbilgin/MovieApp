@@ -21,9 +21,7 @@
 		</div>
 </div>
 </header>
-<div class="slider">
-	<img src="../../assets/img/slider.png" alt="slider photo" class="slider__photo">
-</div>
+
 
 </template>
 
@@ -170,35 +168,6 @@ header{
 
 		}
 
-		}
-		
-	}
-}
-.slider{
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	margin-bottom: 30px;
-
-	&__photo{
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		@include mq("desktop",max) {
-			min-width: calc(100%/2);
-			
-	
-		}
-		@include mq("tablet",max) {	
-			min-width: calc(100%/12);
-
-
-		}
-		@include mq("mobile",max) {
-			min-width: calc(100%/15);
-			
-	
 		}
 		
 	}
