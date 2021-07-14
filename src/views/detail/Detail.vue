@@ -55,14 +55,44 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 40px 10px;
+  margin: 40px 12px;
+  
+  @include mq("mobile",max){
+      flex-direction: column;
+    }
+
+  &__image{
+  
+     @include mq("mobile",max){
+      display: flex;
+      justify-content: center;
+      margin: 10px;
+    }
+  }
   &__img{
    min-width: 300px;
+
+   @include mq("tablet",max){
+      min-width: 90%;
+      
+    }
+  @include mq("mobile",max){
+      flex-direction: column;
+      min-width: 90%;
+        
+    }
   }
   &__content{
     display: flex;
     flex-direction: column;
     margin: 0 0 15px 15px;
+    @include mq("mobile",max){
+      flex-direction: column;
+      padding: 18px;
+      margin: 0;
+      
+    }
+    
   }
   &__title{
     display: flex;
@@ -74,13 +104,40 @@ export default {
     @include font-size(24);
     font-weight: 600;
 
+     @include mq("mobile",max){
+     min-height: 60px;
+      
+    }
+     
+    
+
   }
   &__text{
     display: flex;
     flex-direction: column;
     color:  $white;
     @include font-size(18);
+    padding: 50px;
 
+  }
+  &__raiting{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color:$white;
+    margin: 10px;
+    padding: 40px;
+    border-bottom: 1px solid $white;
+    @include mq("mobile",max){
+      flex-direction: column;
+      
+    }
+    
+
+  }
+  &__bottom{
+    padding: 50px;
+    color:$white;
   }
 }
 </style>
