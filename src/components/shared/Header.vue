@@ -186,17 +186,17 @@ header{
 		justify-content: center;
 		align-items: center;
 		@include mq("desktop",max) {
-			min-width: calc((100%-5%)/2);
+			min-width: calc(100%/2);
 			
 	
 		}
 		@include mq("tablet",max) {	
-			min-width: calc((100%-5%)/12);
+			min-width: calc(100%/12);
 
 
 		}
-		@include mq("mid-tablet",max) {
-			min-width: calc((100%-5%)/12);
+		@include mq("mobile",max) {
+			min-width: calc(100%/12);
 			
 	
 		}
