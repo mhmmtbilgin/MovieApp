@@ -140,24 +140,32 @@
 </template>
 <script>
 import {ref  } from "vue";
+import env from '@/env.js';
 export default {
 	
  
   setup() {
-	let movies= ref({});
+	const movies= ref({});
 
- 
-	
+	const ApiFetch = () => {
+		if (search.value != "") {
+			fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&type=[movie]`)
+            .then(response=>response.json())
+            .then(data=>{
+			console.log(data)
+			});
+		}
+	}
 
     return {
 		movies,
-	
+		ApiFetch
 
     };
     
   },
   
-   	
+   
   
 };
 </script>

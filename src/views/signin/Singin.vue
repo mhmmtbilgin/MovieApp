@@ -1,16 +1,13 @@
 <template>
-<div class="sign-up">
-<div class="sing-up__phone">
-<input type="text" class="sign-up__input" placeholder="Telefon numaranız">
+<div class="sign-in">
+<div class="sing-in__email">
+<input type="text" class="sign-in__input" placeholder="E-posta adresiniz">
 </div>
-<div class="sing-up__email">
-<input type="text" class="sign-up__input" placeholder="E-posta adresiniz">
+<div class="sing-in__pass">
+<input type="password" class="sign-in__input" placeholder="Parolanız">
 </div>
-<div class="sing-up__pass">
-<input type="password" class="sign-up__input" placeholder="Parolanız">
-</div>
-<div class="sing-up__button">
-<input type="button" class="sign-up__input" value="Kaydol">
+<div class="sing-in__button">
+<input type="button" class="sign-in__input" value="Giriş Yap">
 </div>
 
 </div>    
@@ -28,7 +25,7 @@ export default {
 </script>
 
 <style lang="scss">
-.sign-up{
+.sign-in{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,21 +33,23 @@ export default {
     &__input{
         display: flex;
         justify-content: center;
-        min-width: 300px;
-        min-height: 50px;
+        min-width: 250px;
+        min-height: 40px;
         margin: 10px;
         outline: none;
         padding: 12px;
         @include font-size(16);
-        
+       
+     
     }
-    input[type=button]{
+       input[type=button]{
                 background-color: $yellow;
                 border: none;
                 @include font-size(18);
                 margin-bottom: 50px;
         
         }
+     
    
 }
 

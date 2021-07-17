@@ -1,5 +1,11 @@
 <template>
+<form @submit.prevent="searchMovie()" class="header__search">
+		
+				<input type="text" v-model="search" placeholder="Search..."  class="header__search-input">				
+			
+				<input type="submit" value="Search" >
 
+		</form>
 <section class="trends-tv">
 	<div class="trends-tv__title">Movies & TV</div>
 	<div class="trends-tv__cards-episode">
@@ -9,7 +15,7 @@
 			</div>
 			<div class="trends-tv__bottom">
 				<div class="trends-tv__name">
-                    BLİSS
+                 BLİSS
 				</div>
 				<div class="trends-tv__rating">
 					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
@@ -17,118 +23,7 @@
 			</div>
 
 		</div>
-        <div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-        <div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-        <div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-        <div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-        <div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-		<div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-		<div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-		<div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
+       
 	</div>
 
 
@@ -136,27 +31,40 @@
 
 </template>
 <script>
-import {ref  } from "vue";
+import {ref } from "vue";
+import env from "@/env.js";
 export default {
-	
- 
+
   setup() {
-	let movies= ref({});
+	const movies= ref({});
+	const search = ref("");
+
+	const searchMovie = () => {
+		if (search.value != "") {
+			fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&s=${search.value}`)
+            .then(response=>response.json())
+            .then(data=>{
+			movies.value=data.search;
+			search.value="";
+			console.log(data)
+			});
+		}
+	}
 
  
 	
 
     return {
 		movies,
+		search,
+		searchMovie
 	
 
     };
     
   },
   
-   	
-  
-};
+}
 </script>
 
 <style lang="scss">
