@@ -1,20 +1,26 @@
 <template>
   <header>
 <div class="header">
-		<div class="header__logo">
-			<img src="../../assets/svg/logo.svg" alt="Logo" >
-		</div>
+		<a href="./" class="header__logo">
+			<img src="../../assets/svg/logo.svg"  alt="Logo" >
+		</a>
+		
 		<div class="header__search">
-			<div class="header__search-inputs">
-				<input type="text" placeholder="Search..."  class="header__search-input">				
-			</div>
+			<form @submit.prevent="searchMovie()" class="header__search" >
+		
+				<input type="text" v-model="search" placeholder="Search..."  class="header__search-input">				
+			
 			<div class="header__search-btn">
-				<img src="../../assets/svg/search-btn.svg" alt="search button" >
+				<input type="submit" value=" " @click="'/search'">
 			</div>
+				
+				
+
+		</form>
 		</div>
 		<div class="header__buttons">
-			<button class="header__sign-in">Sign In</button>
-			<button class="header__sign-up">Sign Up</button>
+			<a href="/signin" class="header__sign-in">Sign In</a>
+			<a href="/signup" class="header__sign-up">Sign Up</a>
 		</div>
 		<div class="header__menu-icon">
 			<img src="../../assets/svg/header-menu.svg" alt="Logo" >
@@ -23,7 +29,39 @@
 </header>
 
 
+
+
+
 </template>
+
+
+  
+<script>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import env from "@/env.js";
+export default {
+  setup() {
+    const search = ref("");
+    const router = useRouter();
+    const searchMovie = () => {
+      if (search.value) {
+        router.replace({
+          path: "/search",
+          query: { q: search.value },
+        });
+      }
+    };
+	
+    return {
+      search,
+      searchMovie,
+    };
+  },
+};
+</script>
+
+
 
 <style lang="scss">
 header{
@@ -87,8 +125,31 @@ header{
 		
 
 			}
+			input[type=submit]{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			padding-right: 10px;
+			background-color: #e1bc3c;
+			border-radius: 0 10px 10px 0;
+			background-image: url("../../assets/svg/search-btn.svg");	
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			height: 30px;
+    		width: 30px;
+			border: none;
+			@include mq("desktop", max) {
+				min-width: calc((100%-5%)/4);
+				justify-content: flex-end;
+			}
+			@include mq("tablet",max) {
+				display: none;
+			}
+		}
 
 		}
+		
 		&__search-input{
 			min-width: 400px;
 			min-height: 45px;
@@ -122,6 +183,7 @@ header{
 				display: none;
 			}
 		}
+		
 		&__buttons{
 			display: flex;
 			flex-direction: row;
@@ -143,6 +205,8 @@ header{
 			min-height: 50px;
 			margin-right: 30px;
 			border: 1px solid black;
+			text-decoration: none;
+			color: black;
 			background-color:#FFCB14;
 			@include font-size(18);
 			@include mq("desktop", max) {
@@ -173,52 +237,4 @@ header{
 	}
 }
 
-// .header {
-//   flex-grow: 1;
-
-//   min-height: 80px;
-
-//   display: flex;
-//   flex-direction: row;
-//   align-items: stretch;
-//   justify-content: space-between;
-
-//   &__menu {
-//     flex-grow: 1;
-
-//     display: flex;
-//     flex-direction: row;
-//     align-items: center;
-//     justify-content: center;
-//   }
-
-//   &__link {
-//     margin: 0 20px;
-//     padding: 10px 20px;
-
-//     display: flex;
-//     flex-direction: row;
-//     align-items: flex-start;
-//     justify-content: center;
-
-//     border-radius: 6px;
-//     background-color: transparent;
-
-//     color: $menu-link;
-//     text-decoration: none;
-//     text-transform: uppercase;
-
-//     transition: background-color 0.4s ease-out;
-
-//     &:hover {
-//       color: $menu-link-hover;
-//       text-decoration: underline;
-//     }
-
-//     &.router-link-active {
-//       background-color: $menu-link-active-bgcolor;
-//       color: $menu-link-active;
-//     }
-//   }
-// }
 </style>

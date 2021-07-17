@@ -1,71 +1,62 @@
 <template>
-<form @submit.prevent="searchMovie()" class="header__search">
-		
-				<input type="text" v-model="search" placeholder="Search..."  class="header__search-input">				
-			
-				<input type="submit" value="Search" >
-
-		</form>
 <section class="trends-tv">
 	<div class="trends-tv__title">Movies & TV</div>
 	<div class="trends-tv__cards-episode">
-		<div class="trends-tv__card">
+		<div class="trends-tv__card"  v-for="movie in foundmovies" :key="movie.imdbID">
+			
 			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
+				<img :src="`https://image.tmdb.org/t/p/w200/` + movie.poster_path" alt="Film Image" class="trends-tv__image">
 			</div>
 			<div class="trends-tv__bottom">
 				<div class="trends-tv__name">
-                 BLİSS
+                {{movie.title}}
 				</div>
 				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
+					<img src="../../assets/svg/star.svg" alt="Raiting" > {{movie.vote_average}}
 				</div>
 			</div>
+			
 
-		</div>
+		</div> 
        
 	</div>
+
 
 
 </section>
 
 </template>
+
 <script>
-import {ref } from "vue";
+import { ref, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 import env from "@/env.js";
 export default {
-
   setup() {
-	const movies= ref({});
-	const search = ref("");
-
-	const searchMovie = () => {
-		if (search.value != "") {
-			fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&s=${search.value}`)
-            .then(response=>response.json())
-            .then(data=>{
-			movies.value=data.search;
-			search.value="";
-			console.log(data)
-			});
-		}
-	}
-
- 
-	
-
+    const route = useRoute();
+    const foundmovies = ref([]);
+    const getMovies = async () =>
+      await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${env.apikey}&language=en-US&page=1&include_adult=false&query=${route.query.q}&append_to_response=videos,credits,release_dates,similar,images`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          foundmovies.value = data.results.filter(
+            (item) => item.poster_path != null
+          );
+          console.log(foundmovies);
+        });
+    watchEffect(() => {
+      getMovies();
+    });
     return {
-		movies,
-		search,
-		searchMovie
-	
-
+      foundmovies,
     };
-    
   },
-  
-}
+};
 </script>
+
+
 
 <style lang="scss">
 
@@ -74,6 +65,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+  
     &__title{
         @include font-size(18);
         color:rgb(255, 255, 255);

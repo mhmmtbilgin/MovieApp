@@ -14,8 +14,10 @@ const routes = [
   }, {
     path: '/search',
     name: 'Search',
-    component: SearchComponent
-  }, {
+    component: SearchComponent,
+    props: (route) => ({ query: route.query.q }),
+  },
+   {
     path: '/detail',
     name: 'Detail',
     component: DetailComponent

@@ -1,15 +1,14 @@
 <template>
 <div class="sign-in">
-<div class="sing-in__email">
-<input type="text" class="sign-in__input" placeholder="E-posta adresiniz">
-</div>
-<div class="sing-in__pass">
-<input type="password" class="sign-in__input" placeholder="Parolanız">
-</div>
-<div class="sing-in__button">
-<input type="button" class="sign-in__input" value="Giriş Yap">
-</div>
-
+    <div class="sing-in__email">
+        <input type="text" class="sign-in__input" placeholder="E-posta adresiniz">
+    </div>
+    <div class="sing-in__pass">
+        <input type="password" class="sign-in__input" placeholder="Parolanız">
+    </div>
+    <div class="sing-in__button">
+        <input type="button" class="sign-in__input" value="Giriş Yap">
+    </div>
 </div>    
 </template>
 

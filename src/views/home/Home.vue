@@ -1,137 +1,26 @@
 <template>
 <div class="slider">
-	<img src="../../assets/img/slider.png" alt="slider photo" class="slider__photo">
+	<img src="../../assets/img/slider.png" alt="slider photo" class="slider__photo" width="1300">
 </div>
 
 <section class="trends-tv">
 	<div class="trends-tv__title">Movies & TV</div>
 	<div class="trends-tv__cards-episode">
-		<div class="trends-tv__card">
+		<div class="trends-tv__card"  v-for="topMovie in topMovies" :movie="topMovie" :key="topMovie.id">
 			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
+				<img v-bind:src="`https://image.tmdb.org/t/p/w200/` + topMovie.poster_path" alt="Film Image" class="trends-tv__image">
 			</div>
 			<div class="trends-tv__bottom">
 				<div class="trends-tv__name">
-                    BLİSS
+                   {{topMovie.title}}{{topMovie.name}}
 				</div>
 				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
+					<img src="../../assets/svg/star.svg" alt="Raiting" > {{topMovie.vote_average}}
 				</div>
 			</div>
 
 		</div>
-        <div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-        <div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-        <div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-        <div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-        <div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-		<div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-		<div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
-		<div class="trends-tv__card">
-			<div class="trends-tv__top">
-				<img src="../../assets/img/bliss.png" alt="Film Image" class="trends-tv__image">
-			</div>
-			<div class="trends-tv__bottom">
-				<div class="trends-tv__name">
-                    BLİSS
-				</div>
-				<div class="trends-tv__rating">
-					<img src="../../assets/svg/star.svg" alt="Raiting" > 7.0
-				</div>
-			</div>
-
-		</div>
+      
 	</div>
 
 
@@ -139,34 +28,29 @@
 
 </template>
 <script>
-import {ref  } from "vue";
-import env from '@/env.js';
+import { onMounted, ref } from "vue";
+import env from "@/env.js";
 export default {
-	
- 
   setup() {
-	const movies= ref({});
-
-	const ApiFetch = () => {
-		if (search.value != "") {
-			fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&type=[movie]`)
-            .then(response=>response.json())
-            .then(data=>{
-			console.log(data)
-			});
-		}
-	}
-
+    const topMovies = ref([]);
+    const getAlltopMovies = async () =>
+      await fetch(
+        `https://api.themoviedb.org/3/trending/all/day?api_key=${env.apikey}&language=en-US&page=1`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.results);
+          topMovies.value = data.results;
+        });
+    onMounted(() => {
+      getAlltopMovies();
+    });
+	
     return {
-		movies,
-		ApiFetch
+      topMovies,
 
     };
-    
   },
-  
-   
-  
 };
 </script>
 
@@ -202,11 +86,15 @@ export default {
 }
 
 
+
 .trends-tv{
     display: flex;
     flex-direction: column;
     align-items: center;
+	
+	
     &__title{
+
         @include font-size(18);
         color:rgb(255, 255, 255);
     }
@@ -215,6 +103,7 @@ export default {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+		
 		
     
         
@@ -229,6 +118,7 @@ export default {
     }
 	&__card{
 	
+		
 		background-color: #FFCB14;
 		margin: 20px;
 		font-weight: 600;
@@ -239,7 +129,15 @@ export default {
         flex-direction: row;
         justify-content: space-between;
         margin: 10px;
+		 
     }
+	&__name{
+		max-width: 140px;
+		
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+	}
 }
 
 </style>
