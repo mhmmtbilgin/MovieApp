@@ -199,6 +199,8 @@ header{
 			}
 			@include mq("mobile",max) {
 				min-width: calc(100%/6);
+				width: 15px;
+				height: 15px;
 			}
 		}
 		
