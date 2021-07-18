@@ -8,7 +8,8 @@ This is a work I did for Front-End Bootcamp. I did the Figma design. Then I crea
 ## Project Images
 
 
-![Untitled](https://user-images.githubusercontent.com/45104758/125067987-9d740800-e0bd-11eb-82c2-226557180277.png)
+![movieApp](https://user-images.githubusercontent.com/45104758/126075720-01866581-be1b-4e57-ad04-293e7130b9b8.png)
+
 
 ## Project setup
 ```
