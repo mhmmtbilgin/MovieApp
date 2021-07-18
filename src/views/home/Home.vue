@@ -4,7 +4,7 @@
 </div>
 
 <section class="trends-tv">
-	<div class="trends-tv__title">Movies & TV</div>
+	<div class="trends-tv__title">Movies</div>
 	<div class="trends-tv__cards-episode">
 		<div class="trends-tv__card"  v-for="topMovie in topMovies" :movie="topMovie" :key="topMovie.id">
 			<router-link class="trends-tv__router" :to="'/detail/'+topMovie.id">
@@ -33,7 +33,7 @@ export default {
     const topMovies = ref([]);
     const getAlltopMovies = async () =>
       await fetch(
-        `https://api.themoviedb.org/3/trending/all/day?api_key=${env.apikey}&language=en-US&page=1`
+        `https://api.themoviedb.org/3/trending/movie/day?api_key=${env.apikey}&language=en-US&page=1`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -90,9 +90,8 @@ export default {
 	
 	
     &__title{
-
-        @include font-size(18);
-        color:rgb(255, 255, 255);
+        @include font-size(24);
+        color:$white;
     }
     &__cards-episode{
         display: flex;

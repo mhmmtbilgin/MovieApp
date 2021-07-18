@@ -23,7 +23,9 @@
 			<a href="/signup" class="header__sign-up">Sign Up</a>
 		</div>
 		<div class="header__menu-icon">
-			<img src="../../assets/svg/header-menu.svg" alt="Logo" >
+			<a href="/search">Search</a>
+			<a href="/signin">Signin</a>
+			<a href="/signup">Signup</a>
 		</div>
 </div>
 </header>
@@ -52,7 +54,6 @@ export default {
         });
       }
     };
-	
     return {
       search,
       searchMovie,
@@ -79,25 +80,26 @@ header{
 		background-color: #FFCB14;
 
 		@include mq("desktop",max) {
-			min-width: calc((100%-5%)/1);
+			min-width: calc(100%/1);
 			height: 170px;
 			margin: 10px 0 10px 0;
 	
 		}
 		@include mq("mid-tablet",max) {
-			min-width: calc((100%-5%)/4);
+			min-width: calc(100%/4);
 			
 	
 		}
 		
 
 		@include mq("tablet",max) {	
-			min-width: calc((100%-5%)/10);
+			min-width: calc(100%/10);
 		
 
 		}
 		@include mq("mobile",max) {	
 				height: 70px;
+				justify-content: space-between;
 			
 
 
@@ -108,7 +110,7 @@ header{
 		flex-direction: column;
 		justify-content: center;
 		@include mq("desktop", max) {
-			min-width: calc((100%-5%)/6);
+			min-width: calc(100%/6);
 	
 
 			
@@ -125,6 +127,9 @@ header{
 		
 
 			}
+			@include mq("mobile",max) {
+				display: none;
+			}
 			input[type=submit]{
 			display: flex;
 			flex-direction: row;
@@ -140,12 +145,13 @@ header{
     		width: 30px;
 			border: none;
 			@include mq("desktop", max) {
-				min-width: calc((100%-5%)/4);
+				min-width: calc(100%/4);
 				justify-content: flex-end;
 			}
 			@include mq("tablet",max) {
 				display: none;
 			}
+			
 		}
 
 		}
@@ -188,9 +194,6 @@ header{
 			display: flex;
 			flex-direction: row;
 			align-items: center;
-			@include mq("desktop",max) {
-
-			}
 			
 			@include mq("tablet",max) {
 				display: none;
@@ -222,12 +225,39 @@ header{
 		}
 		&__menu-icon{
 			display: none;
+			
 			@include mq("tablet",max) {
 				display: flex;
 			}
 			@include mq("mobile",max) {	
-				height: 70px;
+				
 				margin-right: 5px;
+				justify-content: center;
+				text-decoration: none;
+				margin-right: 5px;
+				color:$black;
+
+
+		}
+
+		}
+		&__menu-icon a{
+			display: none;
+			flex-direction: column;
+			justify-content: center;
+			text-decoration: none;
+			margin: 3px;
+			color:$black;
+			padding: 5px;
+			@include font-size(16);
+			border: 0.5px solid $black;
+			
+			@include mq("tablet",max) {
+				display: flex;
+			}
+			@include mq("mobile",max) {	
+				display: flex;
+			
 
 
 		}

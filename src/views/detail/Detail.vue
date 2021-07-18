@@ -23,7 +23,7 @@
        </div>
      </div>
      <div class="detail__bottom" >
-        Oyuncular : <div class="detail__casts" v-for="cast in movie.casts.slice(0, 6)" :key="cast.id">
+        Oyuncular : <div class="detail__casts" v-for="cast in movie.casts.slice(0, 3)" :key="cast.id">
             {{cast.name+', '}}
         </div>
      </div>
@@ -107,12 +107,16 @@ export default {
       justify-content: center;
       margin: 10px;
     }
+    @include mq("tablet",max){
+      
+      
+    }
   }
   &__img{
    min-width: 300px;
 
    @include mq("tablet",max){
-      min-width: 90%;
+      min-width: 50%;
       
     }
   @include mq("mobile",max){
@@ -129,6 +133,10 @@ export default {
       flex-direction: column;
       padding: 18px;
       margin: 0;
+      
+    }
+    @include mq("tablet",max){
+      min-width: calc(100%/2);
       
     }
     
@@ -176,11 +184,20 @@ export default {
   }
   &__bottom{
     
-    padding: 50px;
+    padding: 10px;
     color:$white;
     display: flex;
     flex-direction: row;
+    @include mq("mobile",max){
+      flex-direction: column;
+      align-items: center;
+    }
+     @include mq("tablet",max){
+      flex-direction: column;
+      
+    }
   }
+ 
  
 }
 </style>
