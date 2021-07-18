@@ -1,7 +1,7 @@
 <template>
   <header>
 <div class="header">
-		<a href="./" class="header__logo">
+		<a href="./../" class="header__logo">
 			<img src="../../assets/svg/logo.svg"  alt="Logo" >
 		</a>
 		

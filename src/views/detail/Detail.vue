@@ -1,34 +1,31 @@
 <template>
  <div class="detail">
    <div class="detail__image">
-     <img src="../../assets/img/bliss.png" alt="Detail İmage" class="detail__img">
+     <img :src="movie.posterpath" alt="Detail İmage" class="detail__img">
    </div>
    <div class="detail__content">
      <div class="detail__title">
-       BLİSS
+      {{movie.title}}{{movie.name}}
      </div>
      <div class="detail__text">
-       Bliss, Mike Cahill tarafından yazılan ve yönetilen 2021 Amerikan 
-      bilim kurgu drama filmidir. Owen Wilson ve Salma Hayek rol 
-      alıyor. Yakın zamanda boşanmış ve ailesinden uzaklaşmış 
-      orta yaşlı bir adam, mutsuz bir işten kovulduğunda psikotik bir 
-      kırılma yaşar.
+       {{movie.overview}}
      </div>
      <div class="detail__raiting-box">
        <div class="detail__raiting">
          <div class="detail__raiting-text">
-           Raiting : <img src="../../assets/svg/star.svg" alt="Raiting Star" > 7.0
+           Raiting : <img src="../../assets/svg/star.svg" alt="Raiting Star" > {{movie.rating}}
 
          </div>
          <div class="detail__release-date">
-           Gösterim Yılı : 2021
+           Gösterim Yılı : {{movie.releaseyear}}
 
          </div>
        </div>
      </div>
-     <div class="detail__bottom">
-        Oyuncular : Salma Hayek, Owen Wilson, Madeline Zima, 
-      Nesta Cooper
+     <div class="detail__bottom" >
+        Oyuncular : <div class="detail__casts" v-for="cast in movie.casts.slice(0, 6)" :key="cast.id">
+            {{cast.name+', '}}
+        </div>
      </div>
 
    </div>
@@ -37,13 +34,55 @@
 
 <script>
 
-
+import {ref, reactive,watchEffect } from 'vue';
+import { useRoute } from "vue-router";
+import env from '@/env.js';
 export default {
-
   setup() {
-  
-    return {
+    const route = useRoute();
+    let movie = reactive({
+      id: "",
+      title: "",
+      backgroundpath: "",
+      posterpath: "",
+      directors: "",
+      overview: "",
+      tagline: "",
+      releaseyear: "",
+      releasedate: "",
+      casts: "",
+   
+    });
       
+         const getMovie = async () =>
+          await fetch(
+            `https://api.themoviedb.org/3/movie/${route.params.id}?api_key=${env.apikey}&language=en-US&append_to_response=videos,credits,release_dates,similar,images`
+          )
+        .then((response) => response.json())
+        .then((data) => {
+          movie.id = data.id;
+          movie.title = data.title;
+          movie.poster_path = data.poster_path;
+          movie.posterpath = `https://image.tmdb.org/t/p/w300/${data.poster_path}`;
+          movie.overview = data.overview;
+          movie.rating = data.vote_average;
+          movie.releaseyear = `${data.release_date.slice(0, 4)}`;
+          movie.releasedate = data.release_date.split("-").reverse().join("/");
+           movie.casts = data.credits.cast.filter(
+            (item) => item.profile_path != null
+          );
+          
+        });
+        watchEffect(() => {
+          if (route.params.id) {
+            getMovie();
+          }
+        });
+	
+    return {
+      movie,
+    
+     
     };
   },
 };
@@ -136,8 +175,12 @@ export default {
 
   }
   &__bottom{
+    
     padding: 50px;
     color:$white;
+    display: flex;
+    flex-direction: row;
   }
+ 
 }
 </style>

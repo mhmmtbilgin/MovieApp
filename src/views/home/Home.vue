@@ -7,6 +7,7 @@
 	<div class="trends-tv__title">Movies & TV</div>
 	<div class="trends-tv__cards-episode">
 		<div class="trends-tv__card"  v-for="topMovie in topMovies" :movie="topMovie" :key="topMovie.id">
+			<router-link class="trends-tv__router" :to="'/detail/'+topMovie.id">
 			<div class="trends-tv__top">
 				<img v-bind:src="`https://image.tmdb.org/t/p/w200/` + topMovie.poster_path" alt="Film Image" class="trends-tv__image">
 			</div>
@@ -18,12 +19,9 @@
 					<img src="../../assets/svg/star.svg" alt="Raiting" > {{topMovie.vote_average}}
 				</div>
 			</div>
-
+			</router-link>
 		</div>
-      
 	</div>
-
-
 </section>
 
 </template>
@@ -45,10 +43,8 @@ export default {
     onMounted(() => {
       getAlltopMovies();
     });
-	
     return {
       topMovies,
-
     };
   },
 };
@@ -117,13 +113,17 @@ export default {
 		}
     }
 	&__card{
-	
 		
 		background-color: #FFCB14;
 		margin: 20px;
 		font-weight: 600;
 		@include font-size(14);
+		
 	}
+	&__router{
+			color:$black;
+			text-decoration: none;
+		}
     &__bottom{
         display: flex;
         flex-direction: row;

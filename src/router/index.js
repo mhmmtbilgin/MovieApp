@@ -18,9 +18,9 @@ const routes = [
     props: (route) => ({ query: route.query.q }),
   },
    {
-    path: '/detail',
+    path: '/detail/:id',
     name: 'Detail',
-    component: DetailComponent
+    component: DetailComponent,
   },
   {
     path: '/signup',
