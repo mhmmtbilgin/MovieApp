@@ -197,6 +197,9 @@ header{
 			@include mq("tablet",max) {
 				min-width: calc(100%/4);
 			}
+			@include mq("mobile",max) {
+				min-width: calc(100%/6);
+			}
 		}
 		
 		&__buttons{
