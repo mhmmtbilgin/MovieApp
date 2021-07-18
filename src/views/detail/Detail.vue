@@ -96,6 +96,10 @@ export default {
   justify-content: center;
   margin: 40px 12px;
   
+  @include mq("tablet",max){
+      flex-direction: column;
+      align-items: center;
+    }
   @include mq("mobile",max){
       flex-direction: column;
     }
