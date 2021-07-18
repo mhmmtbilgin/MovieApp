@@ -145,13 +145,11 @@ header{
 				justify-content: flex-end;
 			}
 			@include mq("tablet",max) {
-				display: flex;
 				min-width: calc(100%/10);
 			}
 			@include mq("mobile",max) {
-				display: flex;
-				height: 15px;
-				width: 15px;
+				min-width: calc(100%/16);
+				
 			}
 			
 		}
