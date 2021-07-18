@@ -22,11 +22,6 @@
 			<a href="/signin" class="header__sign-in">Sign In</a>
 			<a href="/signup" class="header__sign-up">Sign Up</a>
 		</div>
-		<div class="header__menu-icon">
-			<a href="/search">Search</a>
-			<a href="/signin">Signin</a>
-			<a href="/signup">Signup</a>
-		</div>
 </div>
 </header>
 
@@ -98,8 +93,8 @@ header{
 
 		}
 		@include mq("mobile",max) {	
-				height: 70px;
-				justify-content: space-between;
+				height: 80px;
+				
 			
 
 
@@ -110,7 +105,7 @@ header{
 		flex-direction: column;
 		justify-content: center;
 		@include mq("desktop", max) {
-			min-width: calc(100%/6);
+			min-width: calc(100%/8);
 	
 
 			
@@ -122,13 +117,14 @@ header{
 			flex-direction: row;
 			justify-content: center;
 			@include mq("desktop", max) {
-				min-width: calc((100%-5%)/2);
+				min-width: calc(100%/6);
 				margin-left: 10px;
 		
 
 			}
 			@include mq("mobile",max) {
-				display: none;
+				min-width: calc(100%/35);
+				display: flex;
 			}
 			input[type=submit]{
 			display: flex;
@@ -149,7 +145,13 @@ header{
 				justify-content: flex-end;
 			}
 			@include mq("tablet",max) {
-				display: none;
+				display: flex;
+				min-width: calc(100%/10);
+			}
+			@include mq("mobile",max) {
+				display: flex;
+				height: 15px;
+				width: 15px;
 			}
 			
 		}
@@ -167,11 +169,18 @@ header{
 				outline: none;
 		}
 		@include mq("desktop", max) {
-			min-width: calc((100%-5%)/4);
+			min-width: 300px;
+			min-height: 35;
 			
 		}
 		@include mq("tablet",max) {
-			display: none;
+			min-width: 200px;
+			min-height: 25px;
+		}
+		@include mq("mobile",max) {
+			min-width: 100px;
+			min-height: 15px;
+			margin-left: 0px;
 		}
 		}
 		&__search-btn{
@@ -182,11 +191,11 @@ header{
 			background-color: #9C97974d;
 			border-radius: 0 10px 10px 0;
 			@include mq("desktop", max) {
-				min-width: calc((100%-5%)/4);
+				min-width: calc(100%/4);
 				justify-content: flex-end;
 			}
 			@include mq("tablet",max) {
-				display: none;
+				min-width: calc(100%/4);
 			}
 		}
 		
@@ -196,12 +205,19 @@ header{
 			align-items: center;
 			
 			@include mq("tablet",max) {
-				display: none;
+				margin-left: 15px;
 			}
+			@include mq("mobile",max) {
+				flex-direction: column;
+				height: 48px;
+    			min-width: 80px;
+				
+			}
+		
 		}
 		&__sign-in , &__sign-up{
 			display: flex;
-			flex-direction: row;
+			flex-direction: column;
 			align-items: center;
 			justify-content: center;
 			min-width: 100px;
@@ -213,7 +229,7 @@ header{
 			background-color:#FFCB14;
 			@include font-size(18);
 			@include mq("desktop", max) {
-				min-width: calc((100%-5%)/4);
+				min-width: calc(100%/4);
 				min-height: 20px;
 				justify-content: space-between;
 				margin-right: 8px;
@@ -221,48 +237,24 @@ header{
 				
 				
 			}
+			@include mq("tablet", max) {
+				min-height: 20px;
+				justify-content: space-between;
+				@include font-size(14);
+				
+				
+			}
+			@include mq("mobile", max) {
+				min-width: 50px;
+				@include font-size(10);
+				margin: 3px;
+				
+				
+				
+			}
 		
 		}
-		&__menu-icon{
-			display: none;
-			
-			@include mq("tablet",max) {
-				display: flex;
-			}
-			@include mq("mobile",max) {	
-				
-				margin-right: 5px;
-				justify-content: center;
-				text-decoration: none;
-				margin-right: 5px;
-				color:$black;
-
-
-		}
-
-		}
-		&__menu-icon a{
-			display: none;
-			flex-direction: column;
-			justify-content: center;
-			text-decoration: none;
-			margin: 3px;
-			color:$black;
-			padding: 5px;
-			@include font-size(16);
-			border: 0.5px solid $black;
-			
-			@include mq("tablet",max) {
-				display: flex;
-			}
-			@include mq("mobile",max) {	
-				display: flex;
-			
-
-
-		}
-
-		}
+	
 		
 	}
 }
