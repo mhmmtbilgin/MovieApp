@@ -145,11 +145,13 @@ header{
 				justify-content: flex-end;
 			}
 			@include mq("tablet",max) {
+				display: flex;
 				min-width: calc(100%/10);
 			}
 			@include mq("mobile",max) {
-				min-width: calc(100%/16);
-				
+				display: flex;
+				height: 15px;
+				width: 15px;
 			}
 			
 		}
@@ -195,11 +197,7 @@ header{
 			@include mq("tablet",max) {
 				min-width: calc(100%/4);
 			}
-			@include mq("mobile",max) {
-				min-width: calc(100%/6);
-				width: 15px;
-				height: 15px;
-			}
+			
 		}
 		
 		&__buttons{
