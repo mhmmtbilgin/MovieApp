@@ -205,7 +205,10 @@ header{
 			align-items: center;
 			
 			@include mq("tablet",max) {
+				flex-direction: column;
 				margin-left: 15px;
+				height: 48px;
+    			min-width: 80px;
 			}
 			@include mq("mobile",max) {
 				flex-direction: column;
@@ -232,14 +235,18 @@ header{
 				min-width: calc(100%/4);
 				min-height: 20px;
 				justify-content: space-between;
+				align-items: center;
 				margin-right: 8px;
 				@include font-size(16);
 				
 				
 			}
 			@include mq("tablet", max) {
-				min-height: 20px;
+				min-width: 50px;
+				@include font-size(10);
+				margin: 3px;
 				justify-content: space-between;
+				align-items: center;
 				@include font-size(14);
 				
 				
