@@ -42,6 +42,6 @@ Html, Scss, JavaScript, Vue.js, API
 ### Used API
 
 
-[Fake Store API](https://www.themoviedb.org/settings/api).
+[The Movie API](https://www.themoviedb.org/settings/api).
 
 
